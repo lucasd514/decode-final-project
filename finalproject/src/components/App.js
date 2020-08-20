@@ -5,6 +5,8 @@ import Homepage from "./Homepage";
 import Base from "./Base";
 import Standings from "./Standings";
 import Team from "./teampage";
+import Login from "./Login";
+
 import Createteam from "./CreateTeam";
 
 function App() {
@@ -17,6 +19,9 @@ function App() {
         </Route>
         <Route exact path="/base">
           <Base />
+        </Route>
+        <Route exact path="/Login">
+          <Login />
         </Route>
         <Route exact path="/standings">
           <Standings />

@@ -53,6 +53,61 @@ const handleGetSerieA = async (req, res, next) => {
   return res.send(json);
 };
 
+const handleGetAllPlayers = async (req, res) => {
+  try {
+    const client = await MongoClient(MONGO_URI, options);
+    await client.connect();
+    const db = client.db("fantacalcio");
+    const allplayers = await db.collection("players").find().toArray();
+    client.close();
+
+    res.status(201).json({ status: 201, data: allplayers });
+  } catch (err) {
+    res.status(500).json({ status: 500, message: err.message });
+  }
+};
+
+const handleUpdatePlayerDB = async (player) => {
+  try {
+    const client = await MongoClient(MONGO_URI, options);
+    await client.connect();
+    const db = client.db("fantacalcio");
+    const r = await db.collection("playerDB").insertOne(player);
+    assert.equal(1, r.insertedCount);
+    client.close();
+
+    console.log("update good");
+  } catch (err) {
+    console.log("something went wrong");
+  }
+};
+
+const handleGetPlayerBySquad = async (req, res) => {
+  const team_id = parseInt(req.params.squadra);
+  console.log(team_id);
+
+  const client = await MongoClient(MONGO_URI, options);
+  await client.connect();
+
+  const db = client.db("fantacalcio");
+  db.collection("users").find({ team_id }, (err, result) => {
+    if (result) {
+      console.log("ok done"),
+        res.status(200).send({ status: 200, team_id, result });
+    } else {
+      try {
+        ("nothing here");
+        res.status(404).json({ status: 404, data: req.body });
+      } catch (err) {
+        res
+          .status(500)
+          .json({ status: 500, data: req.body, message: err.message });
+      }
+    }
+    client.close();
+  });
+};
+
 const handleGetAllTeams = async (req, res, next) => {
   const Key = process.env.apiKey;
 
@@ -146,4 +201,7 @@ module.exports = {
   handleCreateUser,
   handleGetAllTeams,
   handleCreatePlayer,
+  handleGetAllPlayers,
+  handleGetPlayerBySquad,
+  handleUpdatePlayerDB,
 };

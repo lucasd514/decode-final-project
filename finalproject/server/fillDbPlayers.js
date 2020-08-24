@@ -13,25 +13,25 @@ const options = {
 
 const teamsByID = [
   496,
-  505,
-  499,
-  487,
-  497,
-  489,
-  492,
-  488,
-  504,
-  502,
-  523,
-  500,
-  494,
-  490,
-  498,
-  503,
-  495,
-  867,
-  518,
-  493,
+  // 505,
+  // 499,
+  // 487,
+  // 497,
+  // 489,
+  // 492,
+  // 488,
+  // 504,
+  // 502,
+  // 523,
+  // 500,
+  // 494,
+  // 490,
+  // 498,
+  // 503,
+  // 495,
+  // 867,
+  // 518,
+  // 493,
 ];
 
 const runPlayerDB = async (player) => {
@@ -47,6 +47,61 @@ const runPlayerDB = async (player) => {
   } catch (err) {
     console.log("something went wrong");
   }
+};
+
+const updatePlayerDB = async (player) => {
+  console.log("player", player);
+  const playerID = player.player_id;
+  const playerShots = player.shots;
+  const playerGoals = player.goals;
+  const playerPasses = player.passes;
+  const playerTackles = player.tackles;
+  const playerDuels = player.duels;
+  const playerDribbles = player.dribbles;
+  const playerFouls = player.fouls;
+  const playerCards = player.cards;
+  const playerPenalty = player.penalty;
+  const playerGames = player.games;
+  const playerSubs = player.substitutes;
+
+  const client = await MongoClient(MONGO_URI, options);
+  try {
+    await client.connect();
+    const db = client.db("fantacalcio");
+    console.log("PLAYERID---------", playerID);
+    if (player === undefined) {
+      throw new Error("Missing info");
+    }
+    const response = await db.collection("playerDB").updateOne(
+      { player_id: playerID },
+      {
+        $set: {
+          shots: playerShots,
+          goals: playerGoals,
+          passes: playerPasses,
+          tackles: playerTackles,
+          duels: playerDuels,
+          dribbles: playerDribbles,
+          fouls: playerFouls,
+          cards: playerCards,
+          penalty: playerPenalty,
+          games: playerGames,
+          substitutes: playerSubs,
+        },
+        $currentDate: { lastModified: true },
+      }
+    );
+    console.log("THIS RESPONSE================", response);
+    console.log("THIS RESPONSECOUNT", response.matchedCount);
+
+    assert.equal(1, response.matchedCount);
+    assert.equal(1, response.modifiedCount);
+
+    console.log("playerdone");
+  } catch (err) {
+    console.log("somethingdied", err);
+  }
+  client.close();
 };
 
 const testThis = async (req, res, next) => {
@@ -93,11 +148,11 @@ const testThis = async (req, res, next) => {
       (player) =>
         moreThanFive(player) && serieAPlayed(player) && thisSeason(player)
     );
-    console.log(filteredPlayers);
 
     await filteredPlayers.forEach(async (player) => {
       console.log("thisid got run", player.player_id);
-      runPlayerDB(player);
+      // runPlayerDB(player);
+      updatePlayerDB(player);
     });
   }
 };

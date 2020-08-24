@@ -90,10 +90,10 @@ const handleGetPlayerBySquad = async (req, res) => {
   await client.connect();
 
   const db = client.db("fantacalcio");
-  db.collection("users").find({ team_id }, (err, result) => {
+  db.collection("players").find({ team_id }, (err, result) => {
     if (result) {
-      console.log("ok done"),
-        res.status(200).send({ status: 200, team_id, result });
+      console.log(result);
+      console.log("ok done"), res.status(200).send(result);
     } else {
       try {
         ("nothing here");
@@ -195,7 +195,7 @@ const handlePostUserDb = async (data) => {
 };
 
 // plugPlayersDb();
-// testThis();
+testThis();
 module.exports = {
   handleGetSerieA,
   handleCreateUser,

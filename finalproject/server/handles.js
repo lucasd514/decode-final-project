@@ -193,9 +193,10 @@ const handlePostUserDb = async (data) => {
   console.log(data);
   // const email = req.body.email;
 };
-
+//ONLY ACTIVATE WHEN YOU NEED TO UPDATE OR UNTIL YOU GET MORE INFO///
 // plugPlayersDb();
-testThis();
+// testThis();
+//////// ^^^^^^^^^^^^^^^^^^^^^^^
 module.exports = {
   handleGetSerieA,
   handleCreateUser,

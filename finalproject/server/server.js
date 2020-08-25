@@ -28,7 +28,7 @@ app.get("/test", handleGetSerieA);
 app.get("/teams", handleGetAllTeams);
 app.post("/user", handleCreateUser);
 app.put("/user", handleUpdateTeam);
-app.get("/getssersquadra", handleGetUserTeam);
+app.post("/getusersquadra", handleGetUserTeam);
 app.post("/giocatore", handleCreatePlayer);
 app.get("/ognigiocatore", handleGetAllPlayers);
 app.put("/giocatore", handleUpdatePlayerDB);

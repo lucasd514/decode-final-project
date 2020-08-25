@@ -53,18 +53,42 @@ const handleGetSerieA = async (req, res, next) => {
   return res.send(json);
 };
 
-const handleGetAllPlayers = async (req, res) => {
+const handleGetUserTeam = async (req, res) => {
+  console.log("in", req.body.email);
+  const emailUse = req.body.email;
+  console.log("email", emailUse);
   try {
     const client = await MongoClient(MONGO_URI, options);
     await client.connect();
     const db = client.db("fantacalcio");
-    const allplayers = await db.collection("players").find().toArray();
+    const r = await db.collection("users").findOne({ email: emailUse });
     client.close();
 
-    res.status(201).json({ status: 201, data: allplayers });
+    console.log(r);
+    res.status(200).send(r);
   } catch (err) {
-    res.status(500).json({ status: 500, message: err.message });
+    res.status(500).send(err);
+    console.log("something went wrong");
   }
+};
+const handleGetAllPlayers = async (req, res) => {
+  console.log("nothing here yet");
+
+  res.status(201).json({ data: req.body });
+  // try {
+  //   const client = await MongoClient(MONGO_URI, options);
+  //   await client.connect();
+  //   const db = client.db("fantacalcio");
+  //   const userTeam = await db
+  //     .collection("users")
+  //     .findOne({ email: "lucas.dalessandro@gmail.com" })
+  //     .toArray();
+  //   client.close();
+
+  //   res.status(201).json({ status: 201, data: userTeam });
+  // } catch (err) {
+  //   res.status(500).json({ status: 500, message: err.message });
+  // }
 };
 
 const handleUpdatePlayerDB = async (player) => {
@@ -237,4 +261,5 @@ module.exports = {
   handleGetPlayerBySquad,
   handleUpdatePlayerDB,
   handleUpdateTeam,
+  handleGetUserTeam,
 };

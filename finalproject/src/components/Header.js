@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "./AuthContext";
 
-function Base() {
-  return <div>DAJE ROMA!</div>;
+function Header() {
+  const { signInWithGoogle, appUser, setAppUser } = useContext(AuthContext);
+
+  return (
+    <>
+      {" "}
+      <div>DAJE ROMA! </div>
+      {appUser ? <div>welcome</div> : <div> please sign in</div>}
+    </>
+  );
 }
 
-export default Base;
+export default Header;

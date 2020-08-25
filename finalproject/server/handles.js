@@ -149,7 +149,6 @@ const handleCreateUser = async (req, res) => {
       try {
         const db = client.db("fantacalcio");
         db.collection("users").insertOne(req.body, { unique: true });
-        assert.equal(1, r.insertedCount);
 
         res.status(201).json({ status: 201, data: req.body });
       } catch (err) {
@@ -158,8 +157,40 @@ const handleCreateUser = async (req, res) => {
           .json({ status: 500, data: req.body, message: err.message });
       }
     }
-    client.close();
   });
+};
+
+const handleUpdateTeam = async (req, res) => {
+  const userEmail = req.body.email;
+  console.log(userEmail);
+  const userTeam = req.body.Team;
+
+  const client = await MongoClient(MONGO_URI, options);
+  try {
+    await client.connect();
+    const db = client.db("fantacalcio");
+    console.log("checking this email", userEmail);
+
+    const response = await db.collection("users").updateOne(
+      { email: userEmail },
+      {
+        $set: {
+          Team: userTeam,
+        },
+        $currentDate: { lastModified: true },
+      }
+    );
+    console.log("THIS RESPONSE================", response);
+    console.log("THIS RESPONSECOUNT", response.matchedCount);
+
+    assert.equal(1, response.matchedCount);
+    assert.equal(1, response.modifiedCount);
+
+    console.log("team updated");
+  } catch (err) {
+    console.log("somethingdied", req.body, err);
+  }
+  client.close();
 };
 
 const handleCreatePlayer = async (req, res) => {
@@ -205,4 +236,5 @@ module.exports = {
   handleGetAllPlayers,
   handleGetPlayerBySquad,
   handleUpdatePlayerDB,
+  handleUpdateTeam,
 };

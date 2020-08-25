@@ -28,12 +28,12 @@ function signInWithEmail(email, password) {
 }
 
 const AuthProvider = ({ children, signOut, user }) => {
-  const [appUser, setAppUser] = useState({});
+  const [appUser, setAppUser] = useState(null);
   const [message, setMessage] = useState("");
 
   const handleSignOut = () => {
     signOut();
-    setAppUser({});
+    setAppUser(null);
   };
 
   const googleProvider = new firebase.auth.GoogleAuthProvider();
@@ -42,25 +42,11 @@ const AuthProvider = ({ children, signOut, user }) => {
     return firebase.auth().signInWithPopup(googleProvider);
   };
 
-  //   useEffect(() => {
-  //     if (user) {
-  //       fetch("/users", {
-  //         method: "post",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify({
-  //           email: user.email,
-  //           amountDue: "$15",
-  //         }),
-  //       })
-  //         .then((response) => response.json())
-  //         .then((data) => {
-  //           setAppUser(data.data);
-  //           setMessage(data.message);
-  //         });
-  //     }
-  //   }, [user]);
+  useEffect(() => {
+    if (user && Object.keys(user).length > 0) {
+      setAppUser(user);
+    }
+  }, [user]);
 
   return (
     <AuthContext.Provider
@@ -70,6 +56,7 @@ const AuthProvider = ({ children, signOut, user }) => {
         signInWithEmail,
         signInWithGoogle,
         handleSignOut,
+        setAppUser,
 
         message,
       }}

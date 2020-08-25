@@ -1,5 +1,5 @@
 const express = require("express");
-const { testReq } = require("./handles");
+const { testReq, handleUpdateTeam } = require("./handles");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const fetch = require("isomorphic-fetch");
@@ -13,6 +13,7 @@ const {
   handleGetAllPlayers,
   handleGetPlayerBySquad,
   handleUpdatePlayerDB,
+  handleGetUserTeam,
 } = require("./handles.js");
 const app = express();
 const port = 8000;
@@ -26,6 +27,8 @@ app.get("/", (req, res) => {
 app.get("/test", handleGetSerieA);
 app.get("/teams", handleGetAllTeams);
 app.post("/user", handleCreateUser);
+app.put("/user", handleUpdateTeam);
+app.get("/getssersquadra", handleGetUserTeam);
 app.post("/giocatore", handleCreatePlayer);
 app.get("/ognigiocatore", handleGetAllPlayers);
 app.put("/giocatore", handleUpdatePlayerDB);

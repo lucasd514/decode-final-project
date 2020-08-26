@@ -1,9 +1,10 @@
 import React, { useContext, useEffect } from "react";
 import { AuthContext } from "../AuthContext";
-import Players from "./players";
+import styled from "styled-components";
+
 function Createteam() {
   const { signInWithGoogle, appUser, setAppUser } = useContext(AuthContext);
-  const [userTeam, setUserTeam] = React.useState(null);
+  const [userTeam, setUserTeam] = React.useState([]);
 
   useEffect(() => {
     if (appUser) {
@@ -13,7 +14,7 @@ function Createteam() {
 
   if (!appUser) {
     return <div>loading</div>;
-  } else console.log("this is appuser in Team", appUser.email);
+  } else console.log("this pulls data");
 
   function getPlayerData(team) {
     let playerInfo = [];
@@ -27,13 +28,10 @@ function Createteam() {
       })
         .then((response) => response.json())
         .then((json) => {
-          console.log(json);
-          playerInfo.push(json);
+          setUserTeam((prevState) => prevState.concat(json));
+          // setState((prevState)>=prevState.concat(json))
         });
-      console.log("ssssssssssssssssss", userTeam);
     }
-    console.log("pplayer info at bootm of 2nd get", playerInfo);
-    return setUserTeam(playerInfo);
   }
 
   function getUserTeam() {
@@ -50,21 +48,37 @@ function Createteam() {
       .then((response) => response.json())
       .then((json) => {
         let team = json.Team;
-        console.log(json.Team);
         // setUserTeam(json.Team);
         getPlayerData(team);
       });
 
     let playerInfo = [];
   }
-  console.log(userTeam);
 
   return (
     <>
-      <div>CurrentTeamJs</div>
-      {/* <Players key={"player"} userteam={userTeam}></Players> */}
+      <Wrapper>
+        <div>YOUR TEAM</div>
+        <div>YourTeam Value: X</div>
+        {userTeam.map((player) => {
+          return (
+            <div>
+              <div>name:{player.player_name}</div>
+              <div>team:{player.team_name}</div>
+              <div>goals:{player.goals.total}</div>
+              <div>assists:{player.goals.assists}</div>
+              <div>Yellow cards:{player.cards.yellow}</div>
+              <div>Red cards:{player.cards.red}</div>
+            </div>
+          );
+        })}
+      </Wrapper>
     </>
   );
 }
+
+const Wrapper = styled.div`
+  border: 2px black solid;
+`;
 
 export default Createteam;

@@ -30,11 +30,27 @@ function signInWithEmail(email, password) {
 const AuthProvider = ({ children, signOut, user }) => {
   const [appUser, setAppUser] = useState(null);
   const [message, setMessage] = useState("");
+  const [allPlayers, setAllPlayers] = useState({});
 
   const handleSignOut = () => {
     signOut();
     setAppUser(null);
   };
+
+  function getPlayerData(team) {
+    console.log("get player data", team);
+    fetch("/ognigiocatore", {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        setAllPlayers(json);
+        console.log("done");
+      });
+  }
 
   const googleProvider = new firebase.auth.GoogleAuthProvider();
 
@@ -44,6 +60,7 @@ const AuthProvider = ({ children, signOut, user }) => {
 
   useEffect(() => {
     if (user && Object.keys(user).length > 0) {
+      getPlayerData();
       setAppUser(user);
     }
   }, [user]);
@@ -57,8 +74,7 @@ const AuthProvider = ({ children, signOut, user }) => {
         signInWithGoogle,
         handleSignOut,
         setAppUser,
-
-        message,
+        allPlayers,
       }}
     >
       {children}

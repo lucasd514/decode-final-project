@@ -93,9 +93,15 @@ const handleGetUserTeam = async (req, res) => {
   }
 };
 const handleGetAllPlayers = async (req, res) => {
-  console.log("nothing here yet");
+  const client = await MongoClient(MONGO_URI, options);
+  await client.connect();
+  const db = client.db("fantacalcio");
+  const r = await db.collection("playerDB").find().toArray();
+  client.close();
 
-  res.status(201).json({ data: req.body });
+  console.log(r);
+
+  res.status(200).json({ data: r });
   // try {
   //   const client = await MongoClient(MONGO_URI, options);
   //   await client.connect();
@@ -128,14 +134,14 @@ const handleUpdatePlayerDB = async (player) => {
 };
 
 const handleGetPlayerBySquad = async (req, res) => {
-  const team_id = parseInt(req.params.squadra);
+  const teamID = parseInt(req.params.squadra);
   console.log(team_id);
 
   const client = await MongoClient(MONGO_URI, options);
   await client.connect();
 
   const db = client.db("fantacalcio");
-  db.collection("players").find({ team_id }, (err, result) => {
+  db.collection("players").find({ team_id: teamID }, (err, result) => {
     if (result) {
       console.log(result);
       console.log("ok done"), res.status(200).send(result);

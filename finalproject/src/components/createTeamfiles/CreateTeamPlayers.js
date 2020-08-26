@@ -9,15 +9,27 @@ function Createteam() {
   );
 
   let teamId = 497;
-  function filterPlayers() {
-    allPlayers.filter((player) => player.id === teamId);
-  }
 
   console.log("these are all my players", allPlayers);
+  // const filteredPlayers = allPlayers.data.filter((player) => {
+  //   return player.team_id === teamId;
+  // });
 
   return allPlayers.data ? (
     <Wrapper>
-      {allPlayers.data.map((player) => {
+      {allPlayers.data
+        .filter((player) => {
+          return player.team_id === teamId;
+        })
+        .map((player) => {
+          return (
+            <div>
+              <div>name:{player.player_name}</div>
+            </div>
+          );
+        })}
+
+      {/* {allPlayers.data.map((player) => {
         return (
           <div>
             <div>name:{player.player_name}</div>
@@ -28,7 +40,7 @@ function Createteam() {
             <div>Red cards:{player.cards.red}</div>
           </div>
         );
-      })}
+      })} */}
     </Wrapper>
   ) : (
     <div>loading</div>

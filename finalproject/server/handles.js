@@ -26,6 +26,27 @@ const options = {
 // };
 
 // dbFunction();
+//----------------------------functions
+
+const handleGetMyPlayer = async (req, res) => {
+  const getPlayerId = req.params.id;
+  const sendID = Number(getPlayerId);
+  console.log(sendID, typeof sendID);
+
+  try {
+    const client = await MongoClient(MONGO_URI, options);
+    await client.connect();
+    const db = client.db("fantacalcio");
+    const r = await db.collection("playerDB").findOne({ player_id: sendID });
+    client.close();
+
+    console.log(r);
+    res.status(200).send(r);
+  } catch (err) {
+    res.status(500).send(err);
+    console.log("something went wrong", err);
+  }
+};
 
 const handleGetSerieA = async (req, res, next) => {
   const Key = process.env.apiKey;
@@ -244,10 +265,9 @@ const handleCreatePlayer = async (req, res) => {
     client.close();
   });
 };
-const handlePostUserDb = async (data) => {
-  console.log(data);
-  // const email = req.body.email;
-};
+
+const handleGetSpecificPlayer = async (req, res) => {};
+
 //ONLY ACTIVATE WHEN YOU NEED TO UPDATE OR UNTIL YOU GET MORE INFO///
 // plugPlayersDb();
 // testThis();
@@ -262,4 +282,5 @@ module.exports = {
   handleUpdatePlayerDB,
   handleUpdateTeam,
   handleGetUserTeam,
+  handleGetMyPlayer,
 };

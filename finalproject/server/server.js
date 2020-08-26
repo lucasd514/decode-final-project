@@ -14,6 +14,7 @@ const {
   handleGetPlayerBySquad,
   handleUpdatePlayerDB,
   handleGetUserTeam,
+  handleGetMyPlayer,
 } = require("./handles.js");
 const app = express();
 const port = 8000;
@@ -33,7 +34,7 @@ app.post("/giocatore", handleCreatePlayer);
 app.get("/ognigiocatore", handleGetAllPlayers);
 app.put("/giocatore", handleUpdatePlayerDB);
 app.get("/ognigiocatore/:squadra", handleGetPlayerBySquad);
-
+app.get("/myplayer/:id", handleGetMyPlayer);
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });

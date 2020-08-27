@@ -33,7 +33,6 @@ function Createteam() {
     console.log(playerInfo[0]);
     setSelectedPlayers((prevState) => prevState.concat(playerInfo[0]));
   }
-  console.log("tehse are the selectedPlayers in create", selectedPlayers);
   // const filteredPlayers = allPlayers.data.filter((player) => {
   //   return player.team_id === teamId;
   // });

@@ -48,8 +48,12 @@ function Createteam() {
       .then((response) => response.json())
       .then((json) => {
         let team = json.Team;
-        // setUserTeam(json.Team);
-        getPlayerData(team);
+        console.log(team);
+        if (team) {
+          getPlayerData(team);
+        } else {
+          setUserTeam("add players to your team");
+        }
       });
 
     let playerInfo = [];
@@ -60,18 +64,22 @@ function Createteam() {
       <Wrapper>
         <div>YOUR TEAM</div>
         <div>YourTeam Value: X</div>
-        {userTeam.map((player) => {
-          return (
-            <div>
-              <div>name:{player.player_name}</div>
-              <div>team:{player.team_name}</div>
-              <div>goals:{player.goals.total}</div>
-              <div>assists:{player.goals.assists}</div>
-              <div>Yellow cards:{player.cards.yellow}</div>
-              <div>Red cards:{player.cards.red}</div>
-            </div>
-          );
-        })}
+        {userTeam === "add players to your team" ? (
+          <div>{userTeam}</div>
+        ) : (
+          userTeam.map((player) => {
+            return (
+              <div>
+                <div>name:{player.player_name}</div>
+                <div>team:{player.team_name}</div>
+                <div>goals:{player.goals.total}</div>
+                <div>assists:{player.goals.assists}</div>
+                <div>Yellow cards:{player.cards.yellow}</div>
+                <div>Red cards:{player.cards.red}</div>
+              </div>
+            );
+          })
+        )}
       </Wrapper>
     </>
   );

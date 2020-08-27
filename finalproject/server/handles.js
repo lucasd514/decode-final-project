@@ -92,6 +92,38 @@ const handleGetUserTeam = async (req, res) => {
     console.log("something went wrong");
   }
 };
+
+const handleUpdateUserTeam = async (req, res) => {
+  const emailUse = req.body.email;
+  const teamUse = req.body.Team;
+  console.log("in,", "email:", emailUse, "team", teamUse);
+  const client = await MongoClient(MONGO_URI, options);
+  try {
+    await client.connect();
+    const db = client.db("fantacalcio");
+
+    const response = await db.collection("users").updateOne(
+      { email: emailUse },
+      {
+        $set: {
+          Team: teamUse,
+        },
+        $currentDate: { lastModified: true },
+      }
+    );
+    console.log("THIS RESPONSE================", response);
+    console.log("THIS RESPONSECOUNT", response.matchedCount);
+
+    assert.equal(1, response.matchedCount);
+    assert.equal(1, response.modifiedCount);
+
+    res.status(200).send({ update: "ok" });
+  } catch (err) {
+    console.log("somethingdied", err);
+  }
+  client.close();
+};
+
 const handleGetAllPlayers = async (req, res) => {
   const client = await MongoClient(MONGO_URI, options);
   await client.connect();
@@ -288,5 +320,6 @@ module.exports = {
   handleUpdatePlayerDB,
   handleUpdateTeam,
   handleGetUserTeam,
+  handleUpdateUserTeam,
   handleGetMyPlayer,
 };

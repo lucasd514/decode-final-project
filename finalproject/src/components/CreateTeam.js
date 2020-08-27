@@ -8,9 +8,7 @@ import styled from "styled-components";
 function Createteam() {
   const { signInWithGoogle, appUser, setAppUser } = useContext(AuthContext);
 
-  console.log("this is appuser in Team", appUser);
-
-  return (
+  return appUser ? (
     <>
       <SubmitTeam />
       <Wrapper>
@@ -18,6 +16,8 @@ function Createteam() {
         <CurrentTeam />
       </Wrapper>
     </>
+  ) : (
+    <div>please sign in</div>
   );
 }
 

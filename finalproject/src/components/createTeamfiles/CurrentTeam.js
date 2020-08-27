@@ -44,7 +44,7 @@ function Createteam() {
 
   function getUserTeam() {
     let userEmail = appUser.email;
-    fetch("/getusersquadra", {
+    fetch("/usersquadra", {
       method: "post",
       headers: {
         "Content-Type": "application/json",

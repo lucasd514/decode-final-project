@@ -34,7 +34,6 @@ function Createteam() {
       })
         .then((response) => response.json())
         .then((json) => {
-          setCurrentUserTeam((prevState) => prevState.concat(json));
           setSelectedPlayers((prevState) => prevState.concat(json));
 
           // setState((prevState)>=prevState.concat(json))
@@ -72,8 +71,8 @@ function Createteam() {
       <Wrapper>
         <div>YOUR TEAM</div>
         <div>YourTeam Value: X</div>
-        {currentUserTeam === "add players to your team" ? (
-          <div>{currentUserTeam}</div>
+        {selectedPlayers.length === 0 ? (
+          <div>add players to your team</div>
         ) : (
           selectedPlayers.map((player) => {
             return (

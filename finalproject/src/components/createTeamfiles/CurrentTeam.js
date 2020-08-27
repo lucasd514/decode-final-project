@@ -3,8 +3,14 @@ import { AuthContext } from "../AuthContext";
 import styled from "styled-components";
 
 function Createteam() {
-  const { signInWithGoogle, appUser, setAppUser } = useContext(AuthContext);
-  const [userTeam, setUserTeam] = React.useState([]);
+  const {
+    signInWithGoogle,
+    appUser,
+    setAppUser,
+    selectedPlayers,
+    setSelectedPlayers,
+  } = useContext(AuthContext);
+  const [currentUserTeam, setCurrentUserTeam] = React.useState([]);
 
   useEffect(() => {
     if (appUser) {
@@ -28,7 +34,9 @@ function Createteam() {
       })
         .then((response) => response.json())
         .then((json) => {
-          setUserTeam((prevState) => prevState.concat(json));
+          setCurrentUserTeam((prevState) => prevState.concat(json));
+          setSelectedPlayers((prevState) => prevState.concat(json));
+
           // setState((prevState)>=prevState.concat(json))
         });
     }
@@ -52,7 +60,7 @@ function Createteam() {
         if (team) {
           getPlayerData(team);
         } else {
-          setUserTeam("add players to your team");
+          setCurrentUserTeam("add players to your team");
         }
       });
 
@@ -64,10 +72,10 @@ function Createteam() {
       <Wrapper>
         <div>YOUR TEAM</div>
         <div>YourTeam Value: X</div>
-        {userTeam === "add players to your team" ? (
-          <div>{userTeam}</div>
+        {currentUserTeam === "add players to your team" ? (
+          <div>{currentUserTeam}</div>
         ) : (
-          userTeam.map((player) => {
+          selectedPlayers.map((player) => {
             return (
               <div>
                 <div>name:{player.player_name}</div>

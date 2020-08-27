@@ -31,6 +31,7 @@ const AuthProvider = ({ children, signOut, user }) => {
   const [appUser, setAppUser] = useState(null);
   const [message, setMessage] = useState("");
   const [allPlayers, setAllPlayers] = useState({});
+  const [selectedPlayers, setSelectedPlayers] = useState([]);
 
   const handleSignOut = () => {
     signOut();
@@ -75,6 +76,8 @@ const AuthProvider = ({ children, signOut, user }) => {
         handleSignOut,
         setAppUser,
         allPlayers,
+        selectedPlayers,
+        setSelectedPlayers,
       }}
     >
       {children}

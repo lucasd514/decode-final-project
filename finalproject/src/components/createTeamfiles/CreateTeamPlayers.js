@@ -4,43 +4,36 @@ import styled from "styled-components";
 import { AuthContext } from "../AuthContext";
 
 function Createteam() {
-  const { signInWithGoogle, appUser, setAppUser, allPlayers } = useContext(
-    AuthContext
-  );
+  const {
+    signInWithGoogle,
+    appUser,
+    setAppUser,
+    allPlayers,
+    selectedPlayers,
+    setSelectedPlayers,
+  } = useContext(AuthContext);
   const [teamId, setTeamId] = React.useState("");
 
-  const teamsByID = [
-    496,
-    505,
-    499,
-    487,
-    497,
-    489,
-    492,
-    488,
-    504,
-    502,
-    523,
-    500,
-    494,
-    490,
-    498,
-    503,
-    495,
-    867,
-    518,
-    493,
-  ];
   function chooseTeam(e) {
     e.preventDefault();
     let teamNumber = e.target.value;
     let numberedTeamNumber = Number(teamNumber);
-    console.log(numberedTeamNumber);
-    console.log(typeof numberedTeamNumber);
 
     setTeamId(numberedTeamNumber);
   }
-  console.log("these are all my players", allPlayers);
+
+  async function addplayer(e) {
+    e.preventDefault();
+    let playerId = e.target.id;
+    let numberedId = Number(playerId);
+
+    let playerInfo = await allPlayers.data.filter((player) => {
+      return player.player_id === numberedId;
+    });
+    console.log(playerInfo[0]);
+    setSelectedPlayers((prevState) => prevState.concat(playerInfo[0]));
+  }
+  console.log("tehse are the selectedPlayers in create", selectedPlayers);
   // const filteredPlayers = allPlayers.data.filter((player) => {
   //   return player.team_id === teamId;
   // });
@@ -79,7 +72,12 @@ function Createteam() {
         .map((player) => {
           return (
             <div>
-              <div classname={player.player_id} key={player.player_id}>
+              <div
+                onClick={addplayer}
+                value={player.player_id}
+                id={player.player_id}
+                key={player.player_id}
+              >
                 name:{player.player_name}
               </div>
             </div>

@@ -7,9 +7,17 @@ function Createteam() {
   const { signInWithGoogle, appUser, setAppUser, allPlayers } = useContext(
     AuthContext
   );
+  const [teamId, setTeamId] = React.useState(497);
 
-  let teamId = 497;
+  function chooseTeam(e) {
+    e.preventDefault();
+    let teamNumber = e.target.value;
+    let numberedTeamNumber = Number(teamNumber);
+    console.log(numberedTeamNumber);
+    console.log(typeof numberedTeamNumber);
 
+    setTeamId(numberedTeamNumber);
+  }
   console.log("these are all my players", allPlayers);
   // const filteredPlayers = allPlayers.data.filter((player) => {
   //   return player.team_id === teamId;
@@ -17,6 +25,14 @@ function Createteam() {
 
   return allPlayers.data ? (
     <Wrapper>
+      <div>Team Select:</div>
+      <label for="team">Team:</label>
+      <select id="Team" name="Team" onChange={chooseTeam}>
+        <option value="497">Roma</option>
+        <option value="867">Lecce</option>
+        <option value="487">Lazio Shit</option>
+        <option value="496">aaaGiuventus</option>
+      </select>
       {allPlayers.data
         .filter((player) => {
           return player.team_id === teamId;
@@ -24,7 +40,9 @@ function Createteam() {
         .map((player) => {
           return (
             <div>
-              <div>name:{player.player_name}</div>
+              <div classname={player.player_id} key={player.player_id}>
+                name:{player.player_name}
+              </div>
             </div>
           );
         })}

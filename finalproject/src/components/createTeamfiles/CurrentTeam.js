@@ -72,7 +72,6 @@ function Createteam() {
 
     let playerId = e.target.id;
     let numberedId = Number(playerId);
-    console.log(playerId);
     setSelectedPlayers((prevState) =>
       prevState.filter((player) => player.player_id != numberedId)
     );

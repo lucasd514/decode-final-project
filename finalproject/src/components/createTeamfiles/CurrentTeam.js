@@ -10,6 +10,8 @@ function Createteam() {
     allPlayers,
     selectedPlayers,
     setSelectedPlayers,
+    setTeamValue,
+    teamValue,
   } = useContext(AuthContext);
   const [currentUserTeam, setCurrentUserTeam] = React.useState([]);
 
@@ -19,13 +21,7 @@ function Createteam() {
     }
   }, [appUser]);
 
-  if (!appUser) {
-    return <div>loading</div>;
-  } else console.log("this pulls data");
-
   function getPlayerData(team) {
-    let playerInfo = [];
-    console.log("get player data", team);
     for (let i = 0; i < team.length; i++) {
       fetch(`/myplayer/${team[i]}`, {
         method: "get",
@@ -63,8 +59,6 @@ function Createteam() {
           setCurrentUserTeam("add players to your team");
         }
       });
-
-    let playerInfo = [];
   }
 
   async function removePlayer(e) {
@@ -75,19 +69,28 @@ function Createteam() {
     setSelectedPlayers((prevState) =>
       prevState.filter((player) => player.player_id != numberedId)
     );
-
-    // let playerInfo = await allPlayers.data.filter((player) => {
-    //   return player.player_id === numberedId;
-    // });
-    // console.log(playerInfo[0]);
-    // setSelectedPlayers((prevState) => prevState.concat(playerInfo[0]));
   }
+
+  function calculateValue() {
+    if (selectedPlayers.length !== 0) {
+      let values = selectedPlayers.map((player) => player.value);
+      let total = null;
+      values.forEach((value) => (total += value));
+
+      return total;
+    } else {
+      return "no players on team yet!";
+    }
+  }
+  setTeamValue(calculateValue());
+  let thisteamValue = calculateValue();
 
   return (
     <>
       <Wrapper>
         <div>YOUR TEAM</div>
-        <div>YourTeam Value: X</div>
+        <div>players: {selectedPlayers.length} /15</div>
+        <div>YourTeam Value: {teamValue}</div>
         {selectedPlayers.length === 0 ? (
           <div>add players to your team</div>
         ) : (

@@ -12,26 +12,26 @@ const options = {
 };
 
 const teamsByID = [
-  // 496,
-  // 505,
-  // 499,
-  // 487,
+  496,
+  505,
+  499,
+  487,
   497,
-  // 489,
-  // 492,
-  // 488,
-  // 504,
-  // 502,
-  // 523,
-  // 500,
-  // 494,
-  // 490,
-  // 498,
-  // 503,
-  // 495,
-  // 867,
-  // 518,
-  // 493,
+  489,
+  492,
+  488,
+  504,
+  502,
+  523,
+  500,
+  494,
+  490,
+  498,
+  503,
+  495,
+  867,
+  518,
+  493,
 ];
 
 const runPlayerDB = async (player) => {
@@ -51,18 +51,19 @@ const runPlayerDB = async (player) => {
 
 const updatePlayerDB = async (player) => {
   console.log("player", player);
+  // const playerValue = 5;
   const playerID = player.player_id;
-  const playerShots = player.shots;
-  const playerGoals = player.goals;
-  const playerPasses = player.passes;
-  const playerTackles = player.tackles;
-  const playerDuels = player.duels;
-  const playerDribbles = player.dribbles;
-  const playerFouls = player.fouls;
-  const playerCards = player.cards;
-  const playerPenalty = player.penalty;
-  const playerGames = player.games;
-  const playerSubs = player.substitutes;
+  // const playerShots = player.shots;
+  // const playerGoals = player.goals;
+  // const playerPasses = player.passes;
+  // const playerTackles = player.tackles;
+  // const playerDuels = player.duels;
+  // const playerDribbles = player.dribbles;
+  // const playerFouls = player.fouls;
+  // const playerCards = player.cards;
+  // const playerPenalty = player.penalty;
+  // const playerGames = player.games;
+  // const playerSubs = player.substitutes;
 
   const client = await MongoClient(MONGO_URI, options);
   try {
@@ -76,17 +77,7 @@ const updatePlayerDB = async (player) => {
       { player_id: playerID },
       {
         $set: {
-          shots: playerShots,
-          goals: playerGoals,
-          passes: playerPasses,
-          tackles: playerTackles,
-          duels: playerDuels,
-          dribbles: playerDribbles,
-          fouls: playerFouls,
-          cards: playerCards,
-          penalty: playerPenalty,
-          games: playerGames,
-          substitutes: playerSubs,
+          value: playerValue,
         },
         $currentDate: { lastModified: true },
       }

@@ -29,9 +29,10 @@ function signInWithEmail(email, password) {
 
 const AuthProvider = ({ children, signOut, user }) => {
   const [appUser, setAppUser] = useState(null);
-  const [message, setMessage] = useState("");
   const [allPlayers, setAllPlayers] = useState({});
   const [selectedPlayers, setSelectedPlayers] = useState([]);
+  const [teamValue, setTeamValue] = useState();
+  const [changes, setChanges] = useState();
 
   const handleSignOut = () => {
     signOut();
@@ -78,6 +79,10 @@ const AuthProvider = ({ children, signOut, user }) => {
         allPlayers,
         selectedPlayers,
         setSelectedPlayers,
+        setTeamValue,
+        teamValue,
+        changes,
+        setChanges,
       }}
     >
       {children}

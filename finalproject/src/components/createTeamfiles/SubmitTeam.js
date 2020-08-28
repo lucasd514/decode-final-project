@@ -8,33 +8,37 @@ function Createteam() {
     setAppUser,
     selectedPlayers,
     setSelectedPlayers,
+    teamValue,
   } = useContext(AuthContext);
 
   function submitChanges(e) {
     e.preventDefault();
-
-    let playersArray = selectedPlayers.map((player) => {
-      return player.player_id;
-    });
-    console.log(playersArray);
-    let userEmail = appUser.email;
-    fetch("/updateusersquadra", {
-      method: "put",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: userEmail,
-        Team: playersArray,
-      }),
-    })
-      .then((response) => response.json())
-      .then((json) => {
-        console.log(json);
+    if (teamValue > 100) {
+      window.alert("brokey, drop some players!");
+    } else {
+      let playersArray = selectedPlayers.map((player) => {
+        return player.player_id;
       });
+      console.log(playersArray);
+      let userEmail = appUser.email;
+      fetch("/updateusersquadra", {
+        method: "put",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: userEmail,
+          Team: playersArray,
+        }),
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          console.log(json);
+        });
+    }
   }
 
-  console.log(selectedPlayers);
+  console.log(teamValue);
   return <button onClick={submitChanges}>Submit Changes</button>;
 }
 

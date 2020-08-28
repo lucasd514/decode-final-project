@@ -26,17 +26,23 @@ function Createteam() {
     e.preventDefault();
     let playerId = e.target.id;
     let numberedId = Number(playerId);
+    let playerCheck = selectedPlayers.find(
+      (player) => player.player_id === numberedId
+    );
 
-    let playerInfo = await allPlayers.data.filter((player) => {
-      return player.player_id === numberedId;
-    });
-    console.log(playerInfo[0]);
-    setSelectedPlayers((prevState) => prevState.concat(playerInfo[0]));
+    if (selectedPlayers.length >= 15) {
+      window.alert("too many players homeboy, can't add anymore!");
+    } else if (playerCheck) {
+      window.alert("you already have this player!");
+    } else {
+      let playerInfo = await allPlayers.data.filter((player) => {
+        return player.player_id === numberedId;
+      });
+      setSelectedPlayers((prevState) => prevState.concat(playerInfo[0]));
+    }
   }
-  // const filteredPlayers = allPlayers.data.filter((player) => {
-  //   return player.team_id === teamId;
-  // });
 
+  console.log(selectedPlayers);
   return allPlayers.data ? (
     <Wrapper>
       <div>Team Select:</div>

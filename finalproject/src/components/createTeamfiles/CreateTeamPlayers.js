@@ -82,19 +82,6 @@ function Createteam() {
             </div>
           );
         })}
-
-      {/* {allPlayers.data.map((player) => {
-        return (
-          <div>
-            <div>name:{player.player_name}</div>
-            <div>team:{player.team_name}</div>
-            <div>goals:{player.goals.total}</div>
-            <div>assists:{player.goals.assists}</div>
-            <div>Yellow cards:{player.cards.yellow}</div>
-            <div>Red cards:{player.cards.red}</div>
-          </div>
-        );
-      })} */}
     </Wrapper>
   ) : (
     <div>loading</div>

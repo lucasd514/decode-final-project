@@ -7,6 +7,7 @@ function Createteam() {
     signInWithGoogle,
     appUser,
     setAppUser,
+    allPlayers,
     selectedPlayers,
     setSelectedPlayers,
   } = useContext(AuthContext);
@@ -66,6 +67,23 @@ function Createteam() {
     let playerInfo = [];
   }
 
+  async function removePlayer(e) {
+    e.preventDefault();
+
+    let playerId = e.target.id;
+    let numberedId = Number(playerId);
+    console.log(playerId);
+    setSelectedPlayers((prevState) =>
+      prevState.filter((player) => player.player_id != numberedId)
+    );
+
+    // let playerInfo = await allPlayers.data.filter((player) => {
+    //   return player.player_id === numberedId;
+    // });
+    // console.log(playerInfo[0]);
+    // setSelectedPlayers((prevState) => prevState.concat(playerInfo[0]));
+  }
+
   return (
     <>
       <Wrapper>
@@ -76,8 +94,20 @@ function Createteam() {
         ) : (
           selectedPlayers.map((player) => {
             return (
-              <div>
-                <div>name:{player.player_name}</div>
+              <div
+                onClick={removePlayer}
+                value={player.player_id}
+                id={player.player_id}
+                key={player.player_id}
+              >
+                <div
+                  onClick={removePlayer}
+                  value={player.player_id}
+                  id={player.player_id}
+                  key={player.player_id}
+                >
+                  name:{player.player_name}
+                </div>
                 <div>team:{player.team_name}</div>
                 <div>goals:{player.goals.total}</div>
                 <div>assists:{player.goals.assists}</div>

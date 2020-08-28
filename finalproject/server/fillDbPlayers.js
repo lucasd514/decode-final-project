@@ -50,20 +50,46 @@ const runPlayerDB = async (player) => {
 };
 
 const updatePlayerDB = async (player) => {
-  console.log("player", player);
-  // const playerValue = 5;
+  console.log("goals", player.goals.total);
+  console.log("cards", player.cards.yellow);
+  console.log("lineup", player.games.lineups);
+  console.log("penalties", player.penalty.missed);
+
+  /////////points calculator
+  const totalGoals =
+    player.goals.total * 3 +
+    player.goals.assists +
+    player.goals.conceded * -1 +
+    player.goals.saves * 0.5 +
+    player.penalty.missed * -5;
+  const totalCards =
+    player.cards.yellow + player.cards.yellowred * -4 + player.cards.red * -5;
+  const totalGames = player.games.lineups;
+  const pointsTotal = totalGoals + totalCards + totalGames;
+  console.log(
+    "total goals",
+    totalGoals,
+    "total cards",
+    totalCards,
+    "total games",
+    totalGames,
+    "total points",
+    pointsTotal
+  );
+
+  //////points calculator ends/////////////////
   const playerID = player.player_id;
-  // const playerShots = player.shots;
-  // const playerGoals = player.goals;
-  // const playerPasses = player.passes;
-  // const playerTackles = player.tackles;
-  // const playerDuels = player.duels;
-  // const playerDribbles = player.dribbles;
-  // const playerFouls = player.fouls;
-  // const playerCards = player.cards;
-  // const playerPenalty = player.penalty;
-  // const playerGames = player.games;
-  // const playerSubs = player.substitutes;
+  const playerShots = player.shots;
+  const playerGoals = player.goals;
+  const playerPasses = player.passes;
+  const playerTackles = player.tackles;
+  const playerDuels = player.duels;
+  const playerDribbles = player.dribbles;
+  const playerFouls = player.fouls;
+  const playerCards = player.cards;
+  const playerPenalty = player.penalty;
+  const playerGames = player.games;
+  const playerSubs = player.substitutes;
 
   const client = await MongoClient(MONGO_URI, options);
   try {
@@ -77,13 +103,26 @@ const updatePlayerDB = async (player) => {
       { player_id: playerID },
       {
         $set: {
-          value: playerValue,
+          totalPoints: pointsTotal,
+          gamePoints: totalGames,
+          goalPoints: totalGoals,
+          cardPoints: totalCards,
+
+          shots: playerShots,
+          goals: playerGoals,
+          passes: playerPasses,
+          tackles: playerTackles,
+          duels: playerDuels,
+          dribbles: playerDribbles,
+          fouls: playerFouls,
+          cards: playerCards,
+          penalty: playerPenalty,
+          games: playerGames,
+          substitutes: playerSubs,
         },
         $currentDate: { lastModified: true },
       }
     );
-    console.log("THIS RESPONSE================", response);
-    console.log("THIS RESPONSECOUNT", response.matchedCount);
 
     assert.equal(1, response.matchedCount);
     assert.equal(1, response.modifiedCount);

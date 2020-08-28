@@ -40,7 +40,6 @@ const AuthProvider = ({ children, signOut, user }) => {
   };
 
   function getPlayerData(team) {
-    console.log("get player data", team);
     fetch("/ognigiocatore", {
       method: "get",
       headers: {
@@ -50,7 +49,6 @@ const AuthProvider = ({ children, signOut, user }) => {
       .then((response) => response.json())
       .then((json) => {
         setAllPlayers(json);
-        console.log("done");
       });
   }
 

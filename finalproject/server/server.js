@@ -16,6 +16,7 @@ const {
   handleGetUserTeam,
   handleUpdateUserTeam,
   handleGetMyPlayer,
+  handleGetAllUserTeams,
 } = require("./handles.js");
 const app = express();
 const port = 8000;
@@ -32,6 +33,7 @@ app.post("/user", handleCreateUser);
 app.put("/user", handleUpdateTeam);
 app.post("/usersquadra", handleGetUserTeam);
 app.put("/updateusersquadra", handleUpdateUserTeam);
+app.get("/alluserteams", handleGetAllUserTeams);
 app.post("/giocatore", handleCreatePlayer);
 app.get("/ognigiocatore", handleGetAllPlayers);
 app.put("/giocatore", handleUpdatePlayerDB);

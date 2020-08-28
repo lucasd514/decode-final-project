@@ -2,6 +2,7 @@ require("dotenv").config();
 const bodyParser = require("body-parser");
 const { MongoClient } = require("mongodb");
 const { plugPlayersDb, testThis } = require("./fillDbPlayers");
+const { updateTeamPoints } = require("./calculatePoints");
 
 const assert = require("assert");
 
@@ -304,11 +305,23 @@ const handleCreatePlayer = async (req, res) => {
   });
 };
 
-const handleGetSpecificPlayer = async (req, res) => {};
+const handleGetAllUserTeams = async (req, res) => {
+  const client = await MongoClient(MONGO_URI, options);
+  await client.connect();
+  const db = client.db("fantacalcio");
+  const r = await db.collection("users").find().toArray();
+  client.close();
+
+  console.log(r);
+
+  res.status(200).json({ data: r });
+};
 
 //ONLY ACTIVATE WHEN YOU NEED TO UPDATE OR UNTIL YOU GET MORE INFO///
 // plugPlayersDb();
 // testThis();
+// handleUpdateScore();
+// updateTeamPoints()
 //////// ^^^^^^^^^^^^^^^^^^^^^^^
 module.exports = {
   handleGetSerieA,
@@ -322,4 +335,5 @@ module.exports = {
   handleGetUserTeam,
   handleUpdateUserTeam,
   handleGetMyPlayer,
+  handleGetAllUserTeams,
 };

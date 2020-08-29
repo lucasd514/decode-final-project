@@ -59,7 +59,7 @@ const tallyPoints = (r) => {
   });
 };
 
-const handleGetAllUserTeams = async (req, res) => {
+const handleUpdateUserScores = async (req, res) => {
   const client = await MongoClient(MONGO_URI, options);
   await client.connect();
   const db = client.db("fantacalcio");
@@ -71,7 +71,6 @@ const handleGetAllUserTeams = async (req, res) => {
   //   console.log(r);
 };
 
-// handleGetAllUserTeams();
 module.exports = {
-  updateTeamPoints,
+  handleUpdateUserScores,
 };

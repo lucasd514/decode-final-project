@@ -19,7 +19,7 @@ function Createteam() {
     if (appUser) {
       getUserTeam();
     }
-  }, [appUser, allPlayers]);
+  }, [appUser]);
 
   function getPlayerData(team) {
     for (let i = 0; i < team.length; i++) {

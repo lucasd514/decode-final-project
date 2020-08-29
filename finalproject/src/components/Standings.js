@@ -1,8 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { AuthContext } from "./AuthContext";
-import CurrentTeam from "../components/createTeamfiles/CurrentTeam";
-import CreateTeamPlayers from "../components/createTeamfiles/CreateTeamPlayers";
-import SubmitTeam from "../components/createTeamfiles/SubmitTeam";
+import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 function Standings() {
@@ -20,7 +18,7 @@ function Standings() {
     if (appUser) {
       getTeams();
     }
-  }, [appUser, allPlayers]);
+  }, [appUser]);
 
   function getTeams() {
     fetch("/alluserteams", {
@@ -34,21 +32,26 @@ function Standings() {
         const sortedTeam = json.data.sort(
           (a, b) => b.totalPoints - a.totalPoints
         );
-        console.log("sorted json", sortedTeam);
         setAllTeams(json.data);
       });
   }
+
   return allTeams.length > 2 ? (
     <>
       <div>teams are present</div>
       <ol>
-        {allTeams.map((team) => (
-          <div>
+        {allTeams.map((team) => {
+          let linkto = "squadra/" + team._id;
+          return (
             <li>
-              {team.displayName} <div>{team.totalPoints}</div>
+              <Link exact to={linkto}>
+                <div>{team.displayName}</div>
+              </Link>
+
+              <div>{team.totalPoints}</div>
             </li>
-          </div>
-        ))}
+          );
+        })}
       </ol>
     </>
   ) : (

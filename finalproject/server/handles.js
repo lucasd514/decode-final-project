@@ -1,10 +1,11 @@
 require("dotenv").config();
 const bodyParser = require("body-parser");
 const { MongoClient } = require("mongodb");
-const { plugPlayersDb, testThis } = require("./fillDbPlayers");
-const { updateTeamPoints } = require("./calculatePoints");
+const { plugPlayersDb, updateStats } = require("./fillDbPlayers");
+const { handleUpdateUserScores } = require("./calculatePoints");
 
 const assert = require("assert");
+const ObjectID = require("mongodb").ObjectID;
 
 require("dotenv").config();
 const MONGO_URI = process.env.MONGO_URI;
@@ -317,11 +318,47 @@ const handleGetAllUserTeams = async (req, res) => {
   res.status(200).json({ data: r });
 };
 
+const handleGetTeamPage = async (req, res) => {
+  console.log("in", req.params.id);
+  const teamIdNumber = req.params.id;
+  console.log("id no", teamIdNumber);
+  try {
+    const client = await MongoClient(MONGO_URI, options);
+    await client.connect();
+    const db = client.db("fantacalcio");
+    const r = await db
+      .collection("users")
+      .findOne({ _id: new ObjectID(teamIdNumber) });
+    client.close();
+
+    console.log(r);
+    res.status(200).send(r);
+  } catch (err) {
+    res.status(500).send(err);
+    console.log("something went wrong");
+  }
+};
+
+const handleUpdateEverything = async (req, res) => {
+  try {
+    await updateStats();
+
+    await handleUpdateUserScores();
+
+    res
+      .status(201)
+      .json({ status: 201, data: "all users and players updated" });
+  } catch (err) {
+    res.status(500).json({ status: 500, data: req.body, message: err.message });
+  }
+};
+
 //ONLY ACTIVATE WHEN YOU NEED TO UPDATE OR UNTIL YOU GET MORE INFO///
 // plugPlayersDb();
 // testThis();
 // handleUpdateScore();
 // updateTeamPoints()
+// handleGetAllUserTeams()
 //////// ^^^^^^^^^^^^^^^^^^^^^^^
 module.exports = {
   handleGetSerieA,
@@ -336,4 +373,6 @@ module.exports = {
   handleUpdateUserTeam,
   handleGetMyPlayer,
   handleGetAllUserTeams,
+  handleUpdateEverything,
+  handleGetTeamPage,
 };

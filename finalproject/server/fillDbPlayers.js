@@ -63,9 +63,9 @@ const updatePlayerDB = async (player) => {
     player.goals.saves * 0.5 +
     player.penalty.missed * -5;
   const totalCards =
-    player.cards.yellow + player.cards.yellowred * -4 + player.cards.red * -5;
+    player.cards.yellow + player.cards.yellowred * 4 + player.cards.red * 5;
   const totalGames = player.games.lineups;
-  const pointsTotal = totalGoals + totalCards + totalGames;
+  const pointsTotal = totalGoals - totalCards + totalGames;
   console.log(
     "total goals",
     totalGoals,
@@ -134,7 +134,7 @@ const updatePlayerDB = async (player) => {
   client.close();
 };
 
-const testThis = async (req, res, next) => {
+const updateStats = async (req, res, next) => {
   const Key = process.env.apiKey;
 
   console.log("open", "+key:", Key);
@@ -188,5 +188,5 @@ const testThis = async (req, res, next) => {
 };
 
 module.exports = {
-  testThis,
+  updateStats,
 };

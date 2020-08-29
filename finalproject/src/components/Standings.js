@@ -14,7 +14,7 @@ function Standings() {
     selectedPlayers,
     setSelectedPlayers,
   } = useContext(AuthContext);
-  const [allTeams, setAllTeams] = React.useState("");
+  const [allTeams, setAllTeams] = React.useState([]);
 
   useEffect(() => {
     if (appUser) {
@@ -31,11 +31,17 @@ function Standings() {
     })
       .then((response) => response.json())
       .then((json) => {
-        setAllTeams(json);
-        console.log(json);
+        console.log("return", json);
+        const sortedTeam = json.data.sort(
+          (a, b) => b.totalPoints - a.totalPoints
+        );
+        console.log("sorted json", sortedTeam);
+        setAllTeams(json.data);
       });
-    console.log(allTeams);
   }
+
+  const sorted = [allTeams].sort((a, b) => (b.totalPoints, a.totalPoints));
+  console.log(sorted);
 
   return <div>Standings go here</div>;
 }

@@ -1,4 +1,3 @@
-require("dotenv").config();
 const bodyParser = require("body-parser");
 const { MongoClient } = require("mongodb");
 const assert = require("assert");
@@ -39,7 +38,6 @@ const updateUserPointTotalDB = async (user, points) => {
   client.close();
 };
 
-////////////////////////////
 const updateTeamPoints = async (user) => {
   let totalUserPoints = 0;
   for (let i = 0; i < user.Team.length; i++) {
@@ -73,7 +71,7 @@ const handleGetAllUserTeams = async (req, res) => {
   //   console.log(r);
 };
 
-handleGetAllUserTeams();
+// handleGetAllUserTeams();
 module.exports = {
   updateTeamPoints,
 };

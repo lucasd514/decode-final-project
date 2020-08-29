@@ -31,7 +31,6 @@ function Standings() {
     })
       .then((response) => response.json())
       .then((json) => {
-        console.log("return", json);
         const sortedTeam = json.data.sort(
           (a, b) => b.totalPoints - a.totalPoints
         );
@@ -39,11 +38,22 @@ function Standings() {
         setAllTeams(json.data);
       });
   }
-
-  const sorted = [allTeams].sort((a, b) => (b.totalPoints, a.totalPoints));
-  console.log(sorted);
-
-  return <div>Standings go here</div>;
+  return allTeams.length > 2 ? (
+    <>
+      <div>teams are present</div>
+      <ol>
+        {allTeams.map((team) => (
+          <div>
+            <li>
+              {team.displayName} <div>{team.totalPoints}</div>
+            </li>
+          </div>
+        ))}
+      </ol>
+    </>
+  ) : (
+    <div>still waiting</div>
+  );
 }
 
 export default Standings;

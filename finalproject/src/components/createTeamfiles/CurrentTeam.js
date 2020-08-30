@@ -4,10 +4,7 @@ import styled from "styled-components";
 
 function Createteam() {
   const {
-    signInWithGoogle,
     appUser,
-    setAppUser,
-    allPlayers,
     selectedPlayers,
     setSelectedPlayers,
     setTeamValue,
@@ -83,7 +80,6 @@ function Createteam() {
     }
   }
   setTeamValue(calculateValue());
-  let thisteamValue = calculateValue();
 
   return (
     <>

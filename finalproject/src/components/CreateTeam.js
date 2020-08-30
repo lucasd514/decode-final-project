@@ -6,7 +6,7 @@ import SubmitTeam from "../components/createTeamfiles/SubmitTeam";
 import styled from "styled-components";
 
 function Createteam() {
-  const { signInWithGoogle, appUser, setAppUser } = useContext(AuthContext);
+  const { appUser } = useContext(AuthContext);
 
   return appUser ? (
     <>

@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
+import Tippy from "@tippy.js/react";
+import "tippy.js/dist/tippy.css";
 
 import { AuthContext } from "../AuthContext";
 
 function Createteam() {
   const {
-    signInWithGoogle,
     appUser,
-    setAppUser,
     allPlayers,
     selectedPlayers,
     setSelectedPlayers,

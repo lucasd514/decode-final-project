@@ -1,12 +1,11 @@
 import React, { useContext, useEffect } from "react";
 import { AuthContext } from "./AuthContext";
-import { Link, useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 function Team() {
   const teamNumber = useParams().id;
   console.log(teamNumber);
-  const { signInWithGoogle, appUser, allPlayers } = useContext(AuthContext);
+  const { appUser } = useContext(AuthContext);
   console.log(teamNumber);
 
   const [team, setTeam] = React.useState([]);

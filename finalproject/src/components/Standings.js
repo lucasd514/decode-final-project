@@ -1,17 +1,10 @@
 import React, { useContext, useEffect } from "react";
 import { AuthContext } from "./AuthContext";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 function Standings() {
-  const {
-    signInWithGoogle,
-    appUser,
-    setAppUser,
-    allPlayers,
-    selectedPlayers,
-    setSelectedPlayers,
-  } = useContext(AuthContext);
+  const { appUser } = useContext(AuthContext);
   const [allTeams, setAllTeams] = React.useState([]);
 
   useEffect(() => {
@@ -32,7 +25,7 @@ function Standings() {
         const sortedTeam = json.data.sort(
           (a, b) => b.totalPoints - a.totalPoints
         );
-        setAllTeams(json.data);
+        setAllTeams(sortedTeam);
       });
   }
 

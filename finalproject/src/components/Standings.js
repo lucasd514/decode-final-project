@@ -1,6 +1,8 @@
 import React, { useContext, useEffect } from "react";
 import { AuthContext } from "./AuthContext";
 import { Link } from "react-router-dom";
+import Header from "./Header";
+
 import styled from "styled-components";
 
 function Standings() {
@@ -31,6 +33,7 @@ function Standings() {
 
   return allTeams.length > 2 ? (
     <>
+      <Header />
       <div>teams are present</div>
       <ol>
         {allTeams.map((team) => {

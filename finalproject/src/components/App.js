@@ -1,18 +1,18 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import GlobalStyles from "./GlobalStyles";
 import Header from "./Header";
 import Homepage from "./Homepage";
 import Base from "./Base";
 import Standings from "./Standings";
 import Team from "./teampage";
 import Login from "./Login";
-
 import Createteam from "./CreateTeam";
 
 function App() {
   return (
     <Router>
-      <Header />
+      <GlobalStyles />
       <Switch>
         <Route exact path="/">
           <Homepage />

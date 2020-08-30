@@ -1,20 +1,15 @@
 import React from "react";
-import SanSiro from "../Images/SanSiro.jpg";
+import Tyson from "../assets/Tyson.jpeg";
 import styled, { keyframes } from "styled-components";
-import { Link, useHistory } from "react-router-dom";
-import Header from "./Header";
 
-function Homepage() {
+export default function VisualHomePage() {
   return (
     <BackDrop>
-      <Header />
       <Motto>
-        <Words>Fantacalcio</Words>
-        <Wordstwo>please sign in:</Wordstwo>
+        <Words>NaN Athletiphs</Words>
+        <Wordstwo>Only the beth</Wordstwo>
         <GalleryButton>
-          <Link exact to="/login">
-            click here
-          </Link>
+          <a href="/items">View Gallery</a>
         </GalleryButton>
       </Motto>
     </BackDrop>
@@ -22,11 +17,11 @@ function Homepage() {
 }
 
 const BackDrop = styled.div`
-  background: url(${SanSiro}) no-repeat center fixed;
-  background-size: cover;
+  background: url(${Tyson})  no-repeat center center fixed ;
+  background-size:cover;
   position: absolute;
-  width: 98vw;
-  height: 98vh;
+  width: 100vw;
+  height: 100vh;
 `;
 
 const WordsFade = keyframes`
@@ -43,9 +38,9 @@ const Words = styled.div`
   font-size: 4.3em;
   padding-bottom: 15px;
   animation: ${WordsFade} 2s;
-  font-family: "Heebo", sans-serif;
-  font-weight: 800;
-  line-height: 5rem;
+  font-family: 'Heebo', sans-serif;
+  font-weight:800;
+  line-height:5rem;
 `;
 
 const TwoFade = keyframes`
@@ -65,8 +60,8 @@ const Wordstwo = styled.div`
   font-size: 3em;
   padding-bottom: 15px;
   animation: ${TwoFade} 3s;
-  font-family: "Heebo", sans-serif;
-  font-weight: 900;
+  font-family: 'Heebo', sans-serif;
+  font-weight:900;
 `;
 
 const Motto = styled.div`
@@ -96,18 +91,17 @@ opacity:100%
 const GalleryButton = styled.button`
   font-size: 1.3em;
   padding: 15px 28px;
+  border-radius: 40px;
   z-index: 1;
-  border: none;
-  background-color: transparent;
-  color: white;
+  background-color: #4848e5d6;
+  color:white;
   animation: ${GalleryFade} 4s;
   &:active {
     transform: translateY(2px);
   }
   a {
     text-decoration: none;
-    color: white;
+    color:white;
+
   }
 `;
-
-export default Homepage;

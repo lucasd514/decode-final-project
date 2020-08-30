@@ -1,6 +1,9 @@
 import React, { useContext } from "react";
 import { AuthContext } from "./AuthContext";
 import { Link, useHistory } from "react-router-dom";
+import styled, { keyframes } from "styled-components";
+import SanPaolo from "../Images/SanPaolo.jpg";
+import Header from "./Header";
 
 function Login() {
   const [loggedIn, setLoggedIn] = React.useState(false);
@@ -38,19 +41,31 @@ function Login() {
   console.log(appUser, loggedIn);
   return (
     <>
-      {" "}
-      {!appUser ? (
-        <button onClick={handleGoogleSignIn}> Sign In with Google</button>
-      ) : (
-        <button onClick={SignOut}> laziale justin bieber</button>
-      )}
-      <Link exact to="/">
-        <h1>ale ale roma ale</h1>
-      </Link>
-      <div id="firebaseui-auth-container"></div>
-      <div id="loader">{loggedIn}</div>{" "}
+      <BackDrop>
+        <Header />{" "}
+        <div>
+          {!appUser ? (
+            <button onClick={handleGoogleSignIn}> Click Here to Sign In</button>
+          ) : (
+            <div>
+              <button onClick={SignOut}> laziale justin bieber</button>
+              <div>Select an Option above</div>
+            </div>
+          )}
+        </div>
+        <div id="firebaseui-auth-container"></div>
+        <div id="loader">{loggedIn}</div>{" "}
+      </BackDrop>
     </>
   );
 }
+
+const BackDrop = styled.div`
+  background: url(${SanPaolo}) no-repeat center fixed;
+  background-size: cover;
+  position: absolute;
+  width: 98vw;
+  height: 98vh;
+`;
 
 export default Login;

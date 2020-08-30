@@ -75,17 +75,31 @@ function Createteam() {
           return player.team_id === teamId;
         })
         .map((player) => {
+          const toolTipContent =
+            player.position === "Goalkeeper"
+              ? `Cost: ${player.value} Saves: ${player.goals.saves} Conceded: ${
+                  player.goals.conceded
+                } Starts: ${player.games.lineups} Cards: Red: ${
+                  player.cards.red + player.cards.yellowred
+                } Yellow: ${player.cards.yellow} `
+              : ` Cost: ${player.value} Goals: ${player.goals.total} Assists: ${
+                  player.goals.assists
+                } Starts: ${player.games.lineups} Cards: Red: ${
+                  player.cards.red + player.cards.yellowred
+                } Yellow: ${player.cards.yellow} `;
           return (
-            <div>
-              <div
-                onClick={addplayer}
-                value={player.player_id}
-                id={player.player_id}
-                key={player.player_id}
-              >
-                name:{player.player_name}
+            <Tippy content={toolTipContent}>
+              <div>
+                <div
+                  onClick={addplayer}
+                  value={player.player_id}
+                  id={player.player_id}
+                  key={player.player_id}
+                >
+                  name:{player.player_name}
+                </div>
               </div>
-            </div>
+            </Tippy>
           );
         })}
     </Wrapper>

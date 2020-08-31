@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { AuthContext } from "../AuthContext";
 import styled from "styled-components";
+import SubmitTeam from "./SubmitTeam";
 
 function Createteam() {
   const {
@@ -88,6 +89,7 @@ function Createteam() {
           <div>YOUR TEAM </div>
           <div>players: {selectedPlayers.length} /15</div>
           <div>YourTeam Value: {teamValue}</div>
+          <SubmitTeam />
         </div>
 
         {selectedPlayers.length === 0 ? (
@@ -134,7 +136,7 @@ const Wrapper = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(100px, 20vh));
   padding: 3px 5px;
   gap: 2em;
-  width: 80vw;
+  width: 50vw;
 `;
 
 const Player = styled.div`

@@ -11,16 +11,20 @@ function Createteam() {
 
   return appUser ? (
     <>
-      <BackDrop>
-        <Header />
-        <Wrapper>
-          <CreateTeamPlayers />
-          <CurrentTeam />
-        </Wrapper>
-      </BackDrop>
+      <Wrapper>
+        <BackDrop />
+        <div>
+          <Header />
+          <PlayerBoxes>
+            <CreateTeamPlayers />
+            <CurrentTeam />
+          </PlayerBoxes>
+        </div>
+      </Wrapper>
     </>
   ) : (
     <BackDrop>
+      <Header />
       <div>please sign in</div>
     </BackDrop>
   );
@@ -33,8 +37,14 @@ const Wrapper = styled.div`
 const BackDrop = styled.div`
   background: url(${SanSiro}) no-repeat center fixed;
   background-size: cover;
-  position: absolute;
+  background-attachment: fixed;
+  position: fixed;
   width: 100vw;
   height: 100vh;
+  z-index: -1000000;
+`;
+
+const PlayerBoxes = styled.div`
+  display: flex;
 `;
 export default Createteam;

@@ -4,7 +4,19 @@ import styled from "styled-components";
 import { Link, useHistory } from "react-router-dom";
 
 function Header() {
-  const { signInWithGoogle, appUser, setAppUser } = useContext(AuthContext);
+  const { signInWithGoogle, appUser, setAppUser, handleSignOut } = useContext(
+    AuthContext
+  );
+
+  function SignOut() {
+    console.log("signmeout");
+    handleSignOut();
+  }
+
+  function SignIn() {
+    console.log("signmein");
+    signInWithGoogle();
+  }
 
   return (
     <>
@@ -30,17 +42,26 @@ function Header() {
           <Link to="/team-details" style={{ textDecoration: "none" }}>
             <Linkto> Your Team</Linkto>{" "}
           </Link>
-          <Link to="/login" style={{ textDecoration: "none" }}>
-            <Linkto>Logout Page</Linkto>{" "}
-          </Link>
         </Navig>
-        <div>
-          {appUser ? <button>Sign Out</button> : <button>Sign In</button>}
-        </div>
+        <SignInOut>
+          {appUser ? (
+            <div onClick={SignOut}>
+              <a href="/">Sign Out</a>
+            </div>
+          ) : (
+            <div onClick={SignIn}>
+              <a href="/login">Sign In</a>
+            </div>
+          )}
+        </SignInOut>
       </Wrapper>
     </>
   );
 }
+
+const SignInOut = styled.div`
+  margin-left: 50vw;
+`;
 
 const Linkto = styled.div`
   text-decoration: none;
@@ -49,13 +70,15 @@ const Linkto = styled.div`
 const Navig = styled.nav`
   display: flex;
   text-decoration: none;
-  margin-left: 20vw;
+  margin-left: 20px;
 `;
 
 const Wrapper = styled.div`
-  border: 3px black solid;
+  border-bottom: 3px black solid;
   display: flex;
   background: transparent;
+  width: 99vw;
+  background-color: rgb(202, 202, 204, 0.8);
 `;
 
 export default Header;

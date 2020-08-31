@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { AuthContext } from "./AuthContext";
 import CurrentTeam from "../components/createTeamfiles/CurrentTeam";
 import CreateTeamPlayers from "../components/createTeamfiles/CreateTeamPlayers";
-import SubmitTeam from "../components/createTeamfiles/SubmitTeam";
+import Header from "../components/Header.js";
 import SanSiro from "../Images/SanSiro2.jpg";
 import styled from "styled-components";
 
@@ -12,7 +12,7 @@ function Createteam() {
   return appUser ? (
     <>
       <BackDrop>
-        <SubmitTeam />
+        <Header />
         <Wrapper>
           <CreateTeamPlayers />
           <CurrentTeam />

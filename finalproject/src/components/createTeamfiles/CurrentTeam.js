@@ -60,7 +60,7 @@ function Createteam() {
 
   async function removePlayer(e) {
     e.preventDefault();
-
+    console.log(e.target);
     let playerId = e.target.id;
     let numberedId = Number(playerId);
     setSelectedPlayers((prevState) =>
@@ -101,12 +101,22 @@ function Createteam() {
                 id={player.player_id}
                 key={player.player_id}
               >
-                <div> {player.player_name}</div>
-                <div>{player.team_name}</div>
-                <div>Goals:{player.goals.total}</div>
-                <div>Assists:{player.goals.assists}</div>
-                <div>Yellow cards:{player.cards.yellow}</div>
-                <div>Red cards:{player.cards.red}</div>
+                <div
+                  onClick={removePlayer}
+                  value={player.player_id}
+                  id={player.player_id}
+                  key={player.player_id}
+                >
+                  {player.player_name}
+                </div>
+
+                <div id={player.player_id}>{player.team_name}</div>
+                <div id={player.player_id}>goals:{player.goals.total}</div>
+                <div id={player.player_id}>assists:{player.goals.assists}</div>
+                <div id={player.player_id}>
+                  Yellow cards:{player.cards.yellow}
+                </div>
+                <div id={player.player_id}>Red cards:{player.cards.red}</div>
               </Player>
             );
           })
@@ -137,5 +147,4 @@ const Player = styled.div`
     cursor: pointer;
   }
 `;
-
 export default Createteam;

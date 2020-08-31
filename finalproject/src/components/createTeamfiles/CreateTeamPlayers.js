@@ -89,16 +89,16 @@ function Createteam() {
                 } Yellow: ${player.cards.yellow} `;
           return (
             <Tippy content={toolTipContent}>
-              <div>
-                <div
+              <Player>
+                <Player
                   onClick={addplayer}
                   value={player.player_id}
                   id={player.player_id}
                   key={player.player_id}
                 >
-                  name:{player.player_name}
-                </div>
-              </div>
+                  {player.player_name}
+                </Player>
+              </Player>
             </Tippy>
           );
         })}
@@ -109,6 +109,15 @@ function Createteam() {
 }
 const Wrapper = styled.div`
   border: 2px black solid;
+  width: 20vw;
   position: relative;
 `;
+const Player = styled.div`
+  background-color: rgb(240, 188, 66, 0.4);
+
+  :hover {
+    background-color: coral;
+  }
+`;
+
 export default Createteam;

@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import GlobalStyles from "./GlobalStyles";
 import Header from "./Header";
 import Homepage from "./Homepage";
 import Base from "./Base";
@@ -12,7 +11,6 @@ import Createteam from "./CreateTeam";
 function App() {
   return (
     <Router>
-      <GlobalStyles />
       <Switch>
         <Route exact path="/">
           <Homepage />

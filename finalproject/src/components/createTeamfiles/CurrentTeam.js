@@ -83,35 +83,31 @@ function Createteam() {
 
   return (
     <>
-      <Wrapper>
-        <div>YOUR TEAM</div>
-        <div>players: {selectedPlayers.length} /15</div>
-        <div>YourTeam Value: {teamValue}</div>
+      <Wrapper style={{ margin: "10px 50px" }}>
+        <div>
+          <div>YOUR TEAM </div>
+          <div>players: {selectedPlayers.length} /15</div>
+          <div>YourTeam Value: {teamValue}</div>
+        </div>
+
         {selectedPlayers.length === 0 ? (
           <div>add players to your team</div>
         ) : (
           selectedPlayers.map((player) => {
             return (
-              <div
+              <Player
                 onClick={removePlayer}
                 value={player.player_id}
                 id={player.player_id}
                 key={player.player_id}
               >
-                <div
-                  onClick={removePlayer}
-                  value={player.player_id}
-                  id={player.player_id}
-                  key={player.player_id}
-                >
-                  name:{player.player_name}
-                </div>
-                <div>team:{player.team_name}</div>
-                <div>goals:{player.goals.total}</div>
-                <div>assists:{player.goals.assists}</div>
+                <div> {player.player_name}</div>
+                <div>{player.team_name}</div>
+                <div>Goals:{player.goals.total}</div>
+                <div>Assists:{player.goals.assists}</div>
                 <div>Yellow cards:{player.cards.yellow}</div>
                 <div>Red cards:{player.cards.red}</div>
-              </div>
+              </Player>
             );
           })
         )}
@@ -122,6 +118,24 @@ function Createteam() {
 
 const Wrapper = styled.div`
   border: 2px black solid;
+  margin-left: 10vw;
+  background: transparent;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 20vh));
+  padding: 3px 5px;
+  gap: 2em;
+  width: 80vw;
+`;
+
+const Player = styled.div`
+  color: white;
+  border: 2px black solid;
+  border-radius: 3px;
+  background-color: rgb(202, 202, 204, 0.6);
+  :hover {
+    background-color: rgb(134, 38, 51, 0.6);
+    cursor: pointer;
+  }
 `;
 
 export default Createteam;

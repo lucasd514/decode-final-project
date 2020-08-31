@@ -40,6 +40,13 @@ function Header() {
           <Link to="/team-details" style={{ textDecoration: "none" }}>
             <Linkto> Your Team</Linkto>{" "}
           </Link>
+          {appUser ? (
+            appUser.email === "lucas.dalessandro@gmail.com" ? (
+              <Link to="/team-details" style={{ textDecoration: "none" }}>
+                <Linkto>Admin</Linkto>
+              </Link>
+            ) : null
+          ) : null}
         </Navig>
         <SignInOut>
           {appUser ? (

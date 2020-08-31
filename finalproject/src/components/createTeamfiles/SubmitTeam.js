@@ -20,7 +20,6 @@ function Createteam() {
       let playersArray = selectedPlayers.map((player) => {
         return player.player_id;
       });
-      console.log(playersArray);
       let userEmail = appUser.email;
       fetch("/updateusersquadra", {
         method: "put",
@@ -34,7 +33,12 @@ function Createteam() {
       })
         .then((response) => response.json())
         .then((json) => {
-          console.log(json);
+          if (json.update === "ok") {
+            window.alert("Changes to squad applied!");
+          } else {
+            window.alert("Something went wrong, try again later!");
+            console.log(json);
+          }
         });
     }
   }

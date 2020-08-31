@@ -41,7 +41,6 @@ function Createteam() {
     }
   }
 
-  console.log(selectedPlayers);
   return allPlayers.data ? (
     <Wrapper>
       <div>Team Select:</div>

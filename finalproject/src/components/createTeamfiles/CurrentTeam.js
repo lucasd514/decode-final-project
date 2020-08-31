@@ -14,7 +14,12 @@ function Createteam() {
   const [currentUserTeam, setCurrentUserTeam] = React.useState([]);
 
   useEffect(() => {
-    if (appUser) {
+    console.log(appUser, "AAPPPPPPPPPPPPPP");
+    console.log(selectedPlayers, "PLAYERSSSSSSSSSSSs");
+    if (appUser && selectedPlayers.length > 0) {
+      console.log("nothing here");
+    } else if (appUser) {
+      console.log("condition passed");
       getUserTeam();
     }
   }, [appUser]);

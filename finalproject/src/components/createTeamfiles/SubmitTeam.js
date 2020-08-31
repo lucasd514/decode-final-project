@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../AuthContext";
+import styled from "styled-components";
 
 function Createteam() {
   const {
@@ -41,5 +42,12 @@ function Createteam() {
   console.log(teamValue);
   return <button onClick={submitChanges}>Submit Changes</button>;
 }
+
+const SubmitButton = styled.button`
+  margin-top: 3px;
+  padding: 0;
+  border: none;
+  background-color: red;
+`;
 
 export default Createteam;

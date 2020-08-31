@@ -16,7 +16,7 @@ time, mark, audio, video, textarea {
 	margin: 0;
 	padding: 0;
 	border: 0;
-	color: #0e172c;
+	color: black;
 	font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
 /* HTML5 display-role reset for older browsers */

@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import Tippy from "@tippy.js/react";
-import "tippy.js/dist/tippy.css";
 
 import { AuthContext } from "../AuthContext";
 
@@ -46,7 +45,6 @@ function Createteam() {
   return allPlayers.data ? (
     <Wrapper>
       <div>Team Select:</div>
-      <label for="team">Team:</label>
       <select id="Team" name="Team" onChange={chooseTeam}>
         <option value="">View Players by Team:</option>
         <option value="496">aaaGiuventus</option>
@@ -107,15 +105,19 @@ function Createteam() {
     <div>loading</div>
   );
 }
+
 const Wrapper = styled.div`
-  border: 2px black solid;
+  border: 3px #504f4c solid;
+  padding: 3px 5px 3px 5px;
+  background-color: rgb(240, 188, 66, 0.7);
+  border-radius: 20px;
   width: 20vw;
+  margin-top: 20px;
+  margin-left: 10vw;
 `;
 const Player = styled.div`
-  background-color: rgb(240, 188, 66, 0.4);
-
   :hover {
-    background-color: coral;
+    background-color: rgb(134, 38, 51, 0.6);
   }
 `;
 

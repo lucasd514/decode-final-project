@@ -28,9 +28,7 @@ function Header() {
             {appUser ? (
               <div>welcome, {appUser.displayName}</div>
             ) : (
-              <Link to="/login">
-                <div> please sign in</div>{" "}
-              </Link>
+              <div> please sign in</div>
             )}
           </div>
         </div>
@@ -61,23 +59,33 @@ function Header() {
 
 const SignInOut = styled.div`
   margin-left: 50vw;
+  text-decoration: none;
+  padding: 15px 20px;
 `;
 
 const Linkto = styled.div`
   text-decoration: none;
   padding: 3px;
+  transition: width 2s;
+  :hover {
+    color: rgb(134, 38, 51);
+    border-bottom: rgb(134, 38, 51) solid 2px;
+  }
 `;
 const Navig = styled.nav`
   display: flex;
+  color: darkgreen;
   text-decoration: none;
-  margin-left: 20px;
+  padding: 15px 20px;
+  position: relative;
+  transition: width 2s;
 `;
 
 const Wrapper = styled.div`
-  border-bottom: 3px black solid;
+  border-bottom: 1px black solid;
   display: flex;
   background: transparent;
-  width: 99vw;
+  width: 100vw;
   background-color: rgb(202, 202, 204, 0.8);
 `;
 

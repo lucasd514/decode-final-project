@@ -84,7 +84,7 @@ function Createteam() {
 
   return (
     <>
-      <Wrapper style={{ margin: "10px 50px" }}>
+      <Wrapper style={{ margin: "20px 50px" }}>
         <div>
           <div>YOUR TEAM </div>
           <div>players: {selectedPlayers.length} /15</div>
@@ -112,13 +112,21 @@ function Createteam() {
                   {player.player_name}
                 </div>
 
-                <div id={player.player_id}>{player.team_name}</div>
-                <div id={player.player_id}>goals:{player.goals.total}</div>
-                <div id={player.player_id}>assists:{player.goals.assists}</div>
-                <div id={player.player_id}>
+                <PlayerStats id={player.player_id}>
+                  {player.team_name}
+                </PlayerStats>
+                <PlayerStats id={player.player_id}>
+                  goals:{player.goals.total}
+                </PlayerStats>
+                <PlayerStats id={player.player_id}>
+                  assists:{player.goals.assists}
+                </PlayerStats>
+                <PlayerStats id={player.player_id}>
                   Yellow cards:{player.cards.yellow}
-                </div>
-                <div id={player.player_id}>Red cards:{player.cards.red}</div>
+                </PlayerStats>
+                <PlayerStats id={player.player_id}>
+                  Red cards:{player.cards.red}
+                </PlayerStats>
               </Player>
             );
           })
@@ -129,24 +137,32 @@ function Createteam() {
 }
 
 const Wrapper = styled.div`
-  border: 2px black solid;
+  border: 3px #504f4c solid;
+  border-radius: 20px;
   margin-left: 10vw;
-  background: transparent;
+  background: rgb(240, 188, 66, 0.7);
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(100px, 20vh));
-  padding: 3px 5px;
+  padding-left: 75px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   gap: 2em;
   width: 50vw;
 `;
 
 const Player = styled.div`
   color: white;
-  border: 2px black solid;
+  border: 2px #504f4c solid;
   border-radius: 3px;
   background-color: rgb(202, 202, 204, 0.6);
   :hover {
     background-color: rgb(134, 38, 51, 0.6);
     cursor: pointer;
   }
+`;
+
+const PlayerStats = styled.div`
+  background-color: 504f4c;
+  opacity: 0.7;
 `;
 export default Createteam;

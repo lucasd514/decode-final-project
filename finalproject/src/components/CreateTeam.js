@@ -34,7 +34,7 @@ const BackDrop = styled.div`
   background: url(${SanSiro}) no-repeat center fixed;
   background-size: cover;
   position: absolute;
-  width: 98vw;
-  height: 98vh;
+  width: 100vw;
+  height: 100vh;
 `;
 export default Createteam;

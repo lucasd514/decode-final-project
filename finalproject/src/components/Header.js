@@ -41,7 +41,7 @@ function Header() {
           </Link>
           {appUser ? (
             appUser.email === "lucas.dalessandro@gmail.com" ? (
-              <Link to="/team-details" style={{ textDecoration: "none" }}>
+              <Link to="/admin" style={{ textDecoration: "none" }}>
                 <Linkto>Admin</Linkto>
               </Link>
             ) : null
@@ -53,7 +53,10 @@ function Header() {
               <a href="/">Sign Out</a>
             </div>
           ) : (
-            <div style={{ textDecoration: "underline", cursor: 'pointer'}} onClick={SignIn}>
+            <div
+              style={{ textDecoration: "underline", cursor: "pointer" }}
+              onClick={SignIn}
+            >
               sign in
             </div>
           )}

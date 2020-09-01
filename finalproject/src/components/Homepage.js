@@ -46,6 +46,7 @@ const Words = styled.div`
   font-family: "Heebo", sans-serif;
   font-weight: 800;
   line-height: 5rem;
+  color: white;
 `;
 
 const TwoFade = keyframes`
@@ -67,6 +68,7 @@ const Wordstwo = styled.div`
   animation: ${TwoFade} 3s;
   font-family: "Heebo", sans-serif;
   font-weight: 900;
+  color: white;
 `;
 
 const Motto = styled.div`

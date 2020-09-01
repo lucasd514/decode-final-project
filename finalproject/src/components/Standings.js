@@ -15,7 +15,6 @@ function Standings() {
     }
   }, [appUser]);
 
-  console.log(selectedPlayers);
   function getTeams() {
     fetch("/alluserteams", {
       method: "get",
@@ -32,6 +31,9 @@ function Standings() {
       });
   }
 
+  function refreshPage() {
+    window.location.reload();
+  }
   return allTeams.length > 2 ? (
     <>
       <Header />
@@ -50,10 +52,17 @@ function Standings() {
             </ListItem>
           );
         })}
+        <button onClick={refreshPage}>Refresh Standings</button>
       </Table>
     </>
   ) : (
-    <div>loading</div>
+    <>
+      <Header />
+      <BackDrop />
+      <Table>
+        <Header2>Loading</Header2>
+      </Table>
+    </>
   );
 }
 

@@ -341,7 +341,7 @@ const handleGetTeamPage = async (req, res) => {
 
 const handleUpdateEverything = async (req, res) => {
   try {
-    await updateStats();
+    // await updateStats();
 
     await handleUpdateUserScores();
 

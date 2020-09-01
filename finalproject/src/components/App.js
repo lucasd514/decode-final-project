@@ -6,6 +6,7 @@ import Base from "./Base";
 import Standings from "./Standings";
 import Team from "./teampage";
 import Login from "./Login";
+import Admin from "./Admin";
 import Createteam from "./CreateTeam";
 
 function App() {
@@ -29,6 +30,9 @@ function App() {
         </Route>
         <Route exact path="/squadra/:id">
           <Team />
+        </Route>
+        <Route exact path="/admin">
+          <Admin />
         </Route>
       </Switch>
     </Router>

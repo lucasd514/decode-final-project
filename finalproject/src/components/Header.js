@@ -14,7 +14,6 @@ function Header() {
   }
 
   function SignIn() {
-    console.log("signmein");
     signInWithGoogle();
   }
 
@@ -54,8 +53,8 @@ function Header() {
               <a href="/">Sign Out</a>
             </div>
           ) : (
-            <div onClick={SignIn}>
-              <a href="/login">Sign In</a>
+            <div style={{ textDecoration: "underline", cursor: 'pointer'}} onClick={SignIn}>
+              sign in
             </div>
           )}
         </SignInOut>

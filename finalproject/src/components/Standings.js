@@ -60,7 +60,7 @@ function Standings() {
       <Header />
       <BackDrop />
       <Table>
-        <Header2>Loading</Header2>
+        <Header2>Please Sign in!</Header2>
       </Table>
     </>
   );

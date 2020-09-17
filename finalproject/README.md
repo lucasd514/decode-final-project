@@ -11,9 +11,15 @@ The application is quite simple in structure with the bulk of the work done in t
 # How it works:
 
 The user logs in and creates a team on the team details page, they can select up to 15 players while respecting a budget of 100. Player values were assigned by myself based on my knowledge of the players, the default value for each player was 5. Max value was 10.
+![First Page](./src/Images/screenshots/screenshot1.JPG)
+![Filled Team](./src/Images/screenshots/screenshot2.JPG)
 
+Once the team is created the team is stored in mongo, where on a weekly basis stats are updated via a function on the admin page. This function calls the api updates the stats for the week, and based on the algorithm assigns each player a score and in turn an overall user score.
 
-Once the team is created the team is stored in mongo, where on a weekly basis stats are updated via a function on the admin page. This function calls the api updates the stats for the week, and based on the algorithm assigns each player a score and in turn an overall user score. Standings are reflected on the standings page where the user can track the weekly progress as well as see the other teams that have been selected.
+![standings](./src/Images/screenshots/screenshot3.JPG)
+Standings are reflected on the standings page where the user can track the weekly progress as well as see the other teams that have been selected.
+
+![opposing team](./src/Images/screenshots/screenshot4.JPG)
 
 
 # updates to come and overall thoughts:
